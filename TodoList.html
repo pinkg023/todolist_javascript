@@ -4,11 +4,36 @@
   <input type="text" id="input">
   <button onclick="createToDo()"> + </button>
   <div id="todolist">
-    <p>test</p>
   </div>
 
 
   <script>
+    function myFunction() {
+    var todolist = document.getElementById("todolist")
+    var x = document.createElement("INPUT");
+    x.name = "newRadioName";
+    x.id = "x"
+    x.setAttribute("type", "radio");
+    
+    var span1 = document.createElement("span"); 
+    span1.innerHTML = "緊急";
+
+    todolist.appendChild(x);
+    todolist.appendChild(span1);  
+    x.checked = true ;
+    document.write('<br/>');
+    
+    var y = document.createElement("INPUT");
+    y.name = "newRadioName";
+    y.setAttribute("type", "radio");
+    var span2 = document.createElement("span"); 
+    span2.innerHTML = "不緊急";
+
+    todolist.appendChild(y);
+    todolist.appendChild(span2); 
+    }
+    myFunction();
+
     function createToDo() {
       var todo = document.createElement("div");    // To-Do div
       var span = document.createElement("span");    // To-Do Span
@@ -21,6 +46,11 @@
         input = "testtest";
       }
       span.innerHTML = input;
+      
+      if( document.getElementById("x").checked == true ){
+        span.style.color = "red";
+      }
+
       todo.appendChild(span);
       document.getElementById("todolist").appendChild(todo);
 
@@ -37,13 +67,16 @@
       todo.appendChild(replaceButton);
 
       removeButton.onclick = function() {        
-        var retVal = confirm("確定刪除?");
+        var retVal = confirm("確定已完成?");
         if (retVal == true) {
-        this.parentNode.parentNode.removeChild(this.parentNode);
+          _this_parentNode = this.parentNode
+          _this_parentNode.firstChild.style.color = "blue";
+          _this_parentNode.removeChild(_this_parentNode.lastChild);
+          _this_parentNode.removeChild(_this_parentNode.lastChild);
         }
         console.log('有跑進來');
       } 
-      removeButton.textContent = "D";
+      removeButton.textContent = "V";
       todo.appendChild(removeButton);
     }
     
